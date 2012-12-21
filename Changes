@@ -1,0 +1,7 @@
+Revision history for Perinci-Sub-PropertyUtil
+
+0.01     2012-12-21 (SHARYANTO)
+
+         First release (on apocalypse day). Split from Perinci-Util to avoid
+         circular dependency [RT#81999].
+

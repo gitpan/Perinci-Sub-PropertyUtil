@@ -1,0 +1,50 @@
+{
+   "abstract" : "Utility routines for Perinci::Sub::Property::* modules",
+   "author" : [
+      "Steven Haryanto <stevenharyanto@gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Perinci-Sub-PropertyUtil",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::Rinci" : "0.01"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Perinci::Sub::Wrapper" : "0.36",
+            "Rinci" : "v1.1.33",
+            "Rinci::Schema" : "v1.1.32.1",
+            "perl" : "5.010001"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "homepage" : "http://metacpan.org/release/Perinci-Sub-PropertyUtil",
+      "repository" : {
+         "url" : "http://github.com/sharyanto/perl-Perinci-Sub-PropertyUtil"
+      }
+   },
+   "version" : "0.01"
+}
+
