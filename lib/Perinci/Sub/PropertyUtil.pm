@@ -10,7 +10,7 @@ our @EXPORT_OK = qw(
                        declare_property
                );
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 sub declare_property {
     my %args   = @_;
@@ -20,38 +20,18 @@ sub declare_property {
 
     $name =~ m!\A((result)/)?\w+\z! or die "Invalid property name";
 
-    my $bs; # base schema (Rinci::metadata)
-    my $ts; # per-type schema (Rinci::metadata::TYPE)
-    my $bpp;
-    my $tpp;
-
-    # insert the property's schema into Rinci::Schema's data
+    # insert the property's schema into Sah::Schema::Rinci
     {
         # XXX currently we skip result/*
         last if $name =~ m!\Aresult/!;
 
-        require Rinci::Schema;
-        $bs = $Rinci::Schema::base;
-        $bpp = $bs->[1]{"keys"}
+        require Sah::Schema::Rinci;
+        my $p = $Sah::Schema::Rinci::SCHEMAS{rinci_function}[1]{_prop}
             or die "BUG: Schema structure changed (1)";
-        $bpp->{$name}
-            and die "Property '$name' is already declared in base schema";
-        if ($type) {
-            if ($type eq 'function') {
-                $ts = $Rinci::Schema::function;
-            } elsif ($type eq 'variable') {
-                $ts = $Rinci::Schema::variable;
-            } elsif ($type eq 'package') {
-                $ts = $Rinci::Schema::package;
-            } else {
-                die "Unknown/unsupported property type: $type";
-            }
-            $tpp = $ts->[1]{"[merge+]keys"}
-                or die "BUG: Schema structure changed (2)";
-            $tpp->{$name}
-                and die "Property '$name' is already declared in $type schema";
-        }
-        ($bpp // $tpp)->{$name} = $schema;
+        $p->{$name}
+            and die "Property '$name' is already declared in schema";
+        # XXX we haven't injected $schema
+        $p->{$name} = {};
     }
 
     # install wrapper handler
@@ -100,7 +80,11 @@ Perinci::Sub::PropertyUtil - Utility routines for Perinci::Sub::Property::* modu
 
 =head1 VERSION
 
-version 0.03
+version 0.04
+
+=head1 RELEASE DATE
+
+2014-04-28
 
 =head1 SYNOPSIS
 

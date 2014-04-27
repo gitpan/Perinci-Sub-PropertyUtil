@@ -3,7 +3,10 @@ NAME
     Perinci::Sub::Property::* modules
 
 VERSION
-    version 0.03
+    version 0.04
+
+RELEASE DATE
+    2014-04-28
 
 SYNOPSIS
 FUNCTIONS
