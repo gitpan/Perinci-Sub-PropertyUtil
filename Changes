@@ -1,5 +1,10 @@
 Revision history for Perinci-Sub-PropertyUtil
 
+0.05     2014-04-30 (SHARYANTO)
+
+         - Handle modifying schema for result/* property.
+
+
 0.04     2014-04-28 (SHARYANTO)
 
          - Use Sah::Schema::Rinci (replaces Rinci::Schema).

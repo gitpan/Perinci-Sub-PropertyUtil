@@ -10,7 +10,7 @@ our @EXPORT_OK = qw(
                        declare_property
                );
 
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 sub declare_property {
     my %args   = @_;
@@ -22,16 +22,23 @@ sub declare_property {
 
     # insert the property's schema into Sah::Schema::Rinci
     {
-        # XXX currently we skip result/*
-        last if $name =~ m!\Aresult/!;
-
         require Sah::Schema::Rinci;
         my $p = $Sah::Schema::Rinci::SCHEMAS{rinci_function}[1]{_prop}
             or die "BUG: Schema structure changed (1)";
-        $p->{$name}
+
+        my $n;
+        if ($name =~ m!\Aresult/(.+)!) {
+            $n = $1;
+            $p = $p->{result}{_prop}
+                or die "BUG: Schema structure changed (2)";
+        } else {
+            $n = $name;
+        }
+
+        $p->{$n}
             and die "Property '$name' is already declared in schema";
         # XXX we haven't injected $schema
-        $p->{$name} = {};
+        $p->{$n} = {};
     }
 
     # install wrapper handler
@@ -80,11 +87,7 @@ Perinci::Sub::PropertyUtil - Utility routines for Perinci::Sub::Property::* modu
 
 =head1 VERSION
 
-version 0.04
-
-=head1 RELEASE DATE
-
-2014-04-28
+This document describes version 0.05 of Perinci::Sub::PropertyUtil (from Perl distribution Perinci-Sub-PropertyUtil), released on 2014-04-30.
 
 =head1 SYNOPSIS
 
