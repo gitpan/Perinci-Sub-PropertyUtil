@@ -1,5 +1,13 @@
 Revision history for Perinci-Sub-PropertyUtil
 
+0.06     2014-04-30 (SHARYANTO)
+
+         - Force install handlers for
+           Perinci::{Sub::Wrapper,CmdLine,Sub::To::POD} even though the main
+           modules are not yet loaded, because we are now called early through
+           Perinci::Sub::Normalize.
+
+
 0.05     2014-04-30 (SHARYANTO)
 
          - Handle modifying schema for result/* property.

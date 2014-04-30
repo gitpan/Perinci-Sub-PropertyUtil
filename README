@@ -3,7 +3,7 @@ NAME
     Perinci::Sub::Property::* modules
 
 VERSION
-    This document describes version 0.05 of Perinci::Sub::PropertyUtil (from
+    This document describes version 0.06 of Perinci::Sub::PropertyUtil (from
     Perl distribution Perinci-Sub-PropertyUtil), released on 2014-04-30.
 
 SYNOPSIS

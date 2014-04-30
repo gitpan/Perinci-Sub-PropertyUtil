@@ -25,7 +25,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Sub-PropertyUtil
   homepage: https://metacpan.org/release/Perinci-Sub-PropertyUtil
   repository: git://github.com/sharyanto/perl-Perinci-Sub-PropertyUtil.git
-version: '0.05'
+version: '0.06'
 x_Dist_Zilla:
   perl:
     version: '5.018001'

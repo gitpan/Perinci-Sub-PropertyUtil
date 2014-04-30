@@ -10,7 +10,7 @@ our @EXPORT_OK = qw(
                        declare_property
                );
 
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 
 sub declare_property {
     my %args   = @_;
@@ -42,7 +42,7 @@ sub declare_property {
     }
 
     # install wrapper handler
-    if ($args{wrapper} && $INC{"Perinci/Sub/Wrapper.pm"}) {
+    if ($args{wrapper}) {
         no strict 'refs';
         my $n = $name; $n =~ s!/!__!g;
         *{"Perinci::Sub::Wrapper::handlemeta_$n"} =
@@ -52,7 +52,7 @@ sub declare_property {
     }
 
     # install Perinci::CmdLine help handler
-    if ($args{cmdline_help} && $INC{"Perinci/CmdLine.pm"}) {
+    if ($args{cmdline_help}) {
         no strict 'refs';
         my $n = $name; $n =~ s!/!__!g;
         *{"Perinci::CmdLine::help_hookmeta_$n"} =
@@ -62,7 +62,7 @@ sub declare_property {
     }
 
     # install Perinci::Sub::To::POD help hook
-    if ($args{pod} && $INC{"Perinci/Sub/To/POD.pm"}) {
+    if ($args{pod}) {
         no strict 'refs';
         my $n = $name; $n =~ s!/!__!g;
         *{"Perinci::Sub::To::POD::hookmeta_$n"} =
@@ -87,7 +87,7 @@ Perinci::Sub::PropertyUtil - Utility routines for Perinci::Sub::Property::* modu
 
 =head1 VERSION
 
-This document describes version 0.05 of Perinci::Sub::PropertyUtil (from Perl distribution Perinci-Sub-PropertyUtil), released on 2014-04-30.
+This document describes version 0.06 of Perinci::Sub::PropertyUtil (from Perl distribution Perinci-Sub-PropertyUtil), released on 2014-04-30.
 
 =head1 SYNOPSIS
 
