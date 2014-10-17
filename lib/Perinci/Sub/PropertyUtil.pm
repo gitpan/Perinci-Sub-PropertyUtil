@@ -1,5 +1,8 @@
 package Perinci::Sub::PropertyUtil;
 
+our $DATE = '2014-10-17'; # DATE
+our $VERSION = '0.07'; # VERSION
+
 use 5.010001;
 use strict;
 use warnings;
@@ -10,15 +13,13 @@ our @EXPORT_OK = qw(
                        declare_property
                );
 
-our $VERSION = '0.06'; # VERSION
-
 sub declare_property {
     my %args   = @_;
     my $name   = $args{name}   or die "Please specify property's name";
     my $schema = $args{schema} or die "Please specify property's schema";
     my $type   = $args{type};
 
-    $name =~ m!\A((result)/)?\w+\z! or die "Invalid property name";
+    $name =~ m!\A((result|args/\*)/)?\w+\z! or die "Invalid property name";
 
     # insert the property's schema into Sah::Schema::Rinci
     {
@@ -31,6 +32,10 @@ sub declare_property {
             $n = $1;
             $p = $p->{result}{_prop}
                 or die "BUG: Schema structure changed (2)";
+        } elsif ($name =~ m!\Aargs/\*/(.+)!) {
+            $n = $1;
+            $p = $p->{args}{_value_prop}
+                or die "BUG: Schema structure changed (3)";
         } else {
             $n = $name;
         }
@@ -44,7 +49,7 @@ sub declare_property {
     # install wrapper handler
     if ($args{wrapper}) {
         no strict 'refs';
-        my $n = $name; $n =~ s!/!__!g;
+        my $n = $name; $n =~ s!(/\*)?/!__!g;
         *{"Perinci::Sub::Wrapper::handlemeta_$n"} =
             sub { $args{wrapper}{meta} };
         *{"Perinci::Sub::Wrapper::handle_$n"} =
@@ -87,7 +92,7 @@ Perinci::Sub::PropertyUtil - Utility routines for Perinci::Sub::Property::* modu
 
 =head1 VERSION
 
-This document describes version 0.06 of Perinci::Sub::PropertyUtil (from Perl distribution Perinci-Sub-PropertyUtil), released on 2014-04-30.
+This document describes version 0.07 of Perinci::Sub::PropertyUtil (from Perl distribution Perinci-Sub-PropertyUtil), released on 2014-10-17.
 
 =head1 SYNOPSIS
 
@@ -107,7 +112,7 @@ Please visit the project's homepage at L<https://metacpan.org/release/Perinci-Su
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Perinci-Sub-PropertyUtil>.
+Source repository is at L<https://github.com/perlancar/perl-Perinci-Sub-PropertyUtil>.
 
 =head1 BUGS
 
@@ -119,11 +124,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

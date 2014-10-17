@@ -1,5 +1,10 @@
 Revision history for Perinci-Sub-PropertyUtil
 
+0.07     2014-10-17 (PERLANCAR)
+
+         - Support property in argument specification (args/*/PROP).
+
+
 0.06     2014-04-30 (SHARYANTO)
 
          - Force install handlers for
